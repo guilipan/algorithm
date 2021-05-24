@@ -1,0 +1,61 @@
+# @see https://www.kernel.org/pub/software/scm/git/docs/gitattributes.html
+# @see https://www.drupal.org/node/1542048
+
+# Normally these settings would be done with macro attributes for improved
+# readability and easier maintenance. However macros can only be defined at the
+# repository root directory. Drupal avoids making any assumptions about where it
+# is installed.
+
+# Define text file attributes.
+# - Treat them as text.
+# - Ensure no CRLF line-endings, neither on checkout nor on checkin.
+# - Detect whitespace errors.
+#   - Exposed by default in `git diff --color` on the CLI.
+#   - Validate with `git diff --check`.
+#   - Deny applying with `git apply --whitespace=error-all`.
+#   - Fix automatically with `git apply --whitespace=fix`.
+*         text=auto
+*.config  text eol=lf
+*.css     text eol=lf
+*.dist    text eol=lf
+*.engine  text eol=lf
+*.html    text eol=lf
+*.inc     text eol=lf
+*.install text eol=lf
+*.vue     text eol=lf
+*.js      text eol=lf
+*.json    text eol=lf
+*.lock    text eol=lf
+*.map     text eol=lf
+*.md      text eol=lf
+*.module  text eol=lf
+*.php     text eol=lf
+*.po      text eol=lf
+*.profile text eol=lf
+*.script  text eol=lf
+*.sh      text eol=lf
+*.sql     text eol=lf
+*.svg     text eol=lf
+*.theme   text eol=lf
+*.twig    text eol=lf
+*.txt     text eol=lf
+*.xml     text eol=lf
+*.yml     text eol=lf
+*.ts      text eol=lf
+# Define binary file attributes.
+# - Do not treat them as text.
+# - Include binary diff in patches instead of "binary files differ."
+*.eot     -text diff
+*.exe     -text diff
+*.gif     -text diff
+*.gz      -text diff
+*.ico     -text diff
+*.jpeg    -text diff
+*.jpg     -text diff
+*.otf     -text diff
+*.phar    -text diff
+*.png     -text diff
+*.svgz    -text diff
+*.ttf     -text diff
+*.woff    -text diff
+*.woff2   -text diff
