@@ -47,6 +47,30 @@ export class MinStack {
   }
 }
 
+/**
+ * 优化后的栈存放最小值和真实入栈元素的差值，如果栈元素小于0，说明当前最小值就是栈顶元素，出栈后要重新计算最小值，如果大于0,说明最小值无变化，把最小值和栈元素正常相加即可
+ *
+ * push(-2)
+ * ----      min=-2
+ * -2-MAX
+ * ----
+ *
+ * push(0)
+ * ----      min=-2
+ * 2
+ * ----
+ * -2-MAX
+ * ----
+ *
+ * push(-3)
+ * ----      min变成-3
+ * -1
+ * ----
+ * 2
+ * ----
+ * -2-MAX
+ * ----
+ */
 export class MinStackOptimize {
   private store: Array<number>
   private min: number
@@ -65,13 +89,19 @@ export class MinStackOptimize {
     const min = this.min
     const popnum = this.store.pop() as number
     if (popnum < 0) {
-      this.min = min + popnum
+      this.min = min - popnum
+      return min
     }
+
     // this.min = Math.min(...this.store)
     return popnum + min
   }
   top() {
-    return this.store[this.store.length - 1] + this.min
+    const item = this.store[this.store.length - 1]
+    if (item < 0) {
+      return this.min
+    }
+    return item + this.min
   }
   getMin() {
     return this.min
